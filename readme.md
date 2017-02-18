@@ -7,7 +7,12 @@ make image processing library on nodejs.
 
 # Dev
 
-## install
+## Technical Stack
+- Javascript
+- nodejs 6.9.4
+- node-canvas 1.6.3
+
+## Install
 First of All, install [node-canvas](https://github.com/Automattic/node-canvas) for CANVAS API for nodejs.
 
 And install npm moduels
