@@ -1,0 +1,24 @@
+{
+  "name": "node-image-filter",
+  "version": "0.0.1",
+  "description": "image filter library for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haegul/node-image-filter.git"
+  },
+  "keywords": [
+    "node",
+    "filter",
+    "image-processiong",
+  ],
+  "author": "haegul PYUN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haegul/node-image-filter/issues"
+  },
+  "homepage": "https://github.com/haegul/node-image-filter#readme"
+}
