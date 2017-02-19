@@ -38,15 +38,6 @@ app.use(function (request, response) {
             return
         }
 
-        var flatArray = [];
-        for (var y = 0; y < 3; i++){
-            for (var x = 0; x < 3; j++){
-                for (var z = 0; z < 4; k++){
-                    flatArray.push(pixels.get(x, y, z));
-                }
-            }
-        }
-
         console.log("got pixels", flatArray);
     });
 });
