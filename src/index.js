@@ -1,7 +1,7 @@
-const filter = require('./filter');
+const renderer = require('./renderer');
 const converter = require('./converter');
 
 module.exports = {
     converter : converter,
-    filter : filter
+    renderer : renderer
 };

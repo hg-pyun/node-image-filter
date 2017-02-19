@@ -2,40 +2,53 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
+const Canvas = require('canvas');
 const Filter = require('../../src');
+
+const getPixels = require('get-pixels');
 
 const app = express();
 
 app.use(function (request, response) {
 
-    var catImage = fs.readFileSync(path.join(__dirname, '../../test/image/cat.jpg'));
-    var base64Image = Filter.converter.imageToBase64(catImage);
-    var imgSrc = Filter.converter.base64ToImageSource(base64Image, 'jpeg');
+    // var catImage = fs.readFileSync(path.join(__dirname, '../../test/image/cat.jpg'));
+    // var base64File = Filter.converter.fileToBase64(catImage);
+    // var imageData = Filter.converter.base64ToImageData(base64File, 'jpeg');
 
+    // var Image = Canvas.Image;
 
-    response.writeHead(200, { 'Content-Type' : 'text/html'});
-    response.end('<img src="'+imgSrc +'" />');
+    // fs.readFile(path.join(__dirname, '../../test/image/cat.jpg'), function(err, data){
+    //     if (err) throw err;
+    //     var img = new Image;
+    //     img.src = data;
+    //
+    //     var canvas = new Canvas(img.width, img.height);
+    //     var ctx = canvas.getContext('2d');
+    //
+    //     // var invertImageData = Filter.renderer.preset.invert(img);
+    //
+    //     ctx.drawImage(img, 0, 0, img.width, img.height);
+    //
+    //     response.writeHead(200, { 'Content-Type' : 'text/html'});
+    //     response.end('<img src="' + canvas.toDataURL() + '" />');
+    // });
 
-    // var Canvas = require('canvas')
-    //     , Image = Canvas.Image
-    //     , canvas = new Canvas(200, 200)
-    //     , ctx = canvas.getContext('2d');
-    //
-    // ctx.font = '30px Impact';
-    // ctx.rotate(.1);
-    // ctx.fillText("Awesome!", 50, 100);
-    //
-    // var te = ctx.measureText('Awesome!');
-    // ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-    // ctx.beginPath();
-    // ctx.lineTo(50, 102);
-    // ctx.lineTo(50 + te.width, 102);
-    // ctx.stroke();
-    //
-    // console.log('<img src="' + canvas.toDataURL() + '" />');
-    //
-    // response.writeHead(200, { 'Content-Type' : 'text/html'});
-    // response.end('<img src="' + canvas.toDataURL() + '" />');
+    getPixels(path.join(__dirname, '../../test/image/cat.jpg'), function(err, pixels) {
+        if(err) {
+            return
+        }
+
+        var flatArray = [];
+        for (var y = 0; y < 3; i++){
+            for (var x = 0; x < 3; j++){
+                for (var z = 0; z < 4; k++){
+                    flatArray.push(pixels.get(x, y, z));
+                }
+            }
+        }
+
+        console.log("got pixels", flatArray);
+    });
 });
 
 app.listen(8090, function () {
