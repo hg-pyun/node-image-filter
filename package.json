@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/haegul/node-image-filter#readme",
   "dependencies": {
-    "get-pixels": "^3.3.0"
+    "get-pixels": "^3.3.0",
+    "save-pixels": "^2.3.4"
   },
   "devDependencies": {
     "express": "^4.14.1"
