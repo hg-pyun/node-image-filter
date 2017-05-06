@@ -1,5 +1,2 @@
-const Preset = require('./Preset');
-const Convolver = require('./convolver');
-
-module.exports.preset = Preset;
-module.exports.convolver = Convolver;
+module.exports.preset = require('./preset');
+module.exports.convolution = require('./convolution');
