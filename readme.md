@@ -1,24 +1,12 @@
 # node-image-filter
-Image Processing Library for nodejs.  
-This project based on [node-canvas](https://github.com/Automattic/node-canvas).
+Image Processing Library for nodejs.
 
 # Purpose
-make image processing library on nodejs.
-
-# Dev
-
-## Technical Stack
-- nodejs 6.9.4
-- node-canvas 1.6.3
-- nodemon
+Make image processing library on nodejs.
 
 ## Install
-First of All, install [node-canvas](https://github.com/Automattic/node-canvas) for CANVAS API for nodejs.
-
-And install npm modules.
 ```
-$ npm install nodemon -g
-$ npm install
+npm install node-image-filter
 ```
 
 # LICENSE
