@@ -15,7 +15,7 @@ const fs = require('fs');
 const path = require('path');
 
 // filter lib
-const Filter = require('../lib');
+const Filter = require('node-image-filter');
 
 const app = express();
 
