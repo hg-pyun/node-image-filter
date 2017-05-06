@@ -8,9 +8,10 @@
     "url": "git+https://github.com/haegul/node-image-filter.git"
   },
   "keywords": [
-    "node",
+    "nodejs",
     "filter",
-    "image-processing"
+    "image-processing",
+    "javscript"
   ],
   "author": "Haegul PYUN(dev-momo)",
   "license": "MIT",
