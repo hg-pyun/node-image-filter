@@ -1,6 +1,6 @@
 {
   "name": "node-image-filter",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Image Filter Library for nodejs",
   "main": "index.js",
   "repository": {
