@@ -1,11 +1,8 @@
 {
   "name": "node-image-filter",
   "version": "0.0.1",
-  "description": "image filter library for nodejs",
+  "description": "Image Filter Library for nodejs",
   "main": "index.js",
-  "scripts": {
-    "dev-server": "nodemon tools/server/index.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/haegul/node-image-filter.git"
@@ -13,19 +10,21 @@
   "keywords": [
     "node",
     "filter",
-    "image-processiong"
+    "image-processing"
   ],
-  "author": "haegul PYUN",
+  "author": "Haegul PYUN(dev-momo)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/haegul/node-image-filter/issues"
   },
   "homepage": "https://github.com/haegul/node-image-filter#readme",
   "dependencies": {
-    "canvas": "^1.6.3",
-    "express": "^4.14.1"
+    "get-pixels": "^3.3.0"
   },
   "devDependencies": {
-    "get-pixels": "^3.3.0"
+    "express": "^4.14.1"
+  },
+  "scripts": {
+    "dev-server": "nodemon server/index.js"
   }
 }
