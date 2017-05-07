@@ -6,17 +6,14 @@ Image Processing Library for nodejs.
 npm install node-image-filter
 ```
 
-## Usage
-
-### Basic
+## Basic Usage
+### Render
 To apply a filter, use the render function.
-- imagePath : Image URL path.
-- filter : filter function.
-- callback : result callback.
 ```
-render(imagePath, filter, callback);
+render(imagePath, filter[, values], callback);
 ```
-callback func receive result data. The data contains image buffer, type, width, height information.
+You can use preset filters or custom filters. callback function receive result data. The data contains image buffer, type, width, height information.
+Let's look at the example.
 
 ```
 const Filter = require('node-image-filter');
@@ -27,7 +24,7 @@ app.use(function (req, res, next) {
     let imagePath = path.join(__dirname, '../samples/cat.jpg');
 
     Filter.render(imagePath, Filter.preset.invert, function (result) {
-        /* result
+        /* result format
         {
             data : array,
             type : 'jpg',
@@ -35,10 +32,71 @@ app.use(function (req, res, next) {
             height : 768
         }
         */
-        fs.writeFile(`result.${result.type}`, result.data);
+        fs.writeFile(`result.${result.type}`, result.data);  // save local
         res.send('save filtered image');
     })
 });
+```
+
+### Preset Filters
+'node-image-filter' include Preset filters. There are currently four filters in total.
+You just need to pass it as the second parameter of the Render function.
+```
+const Filter = require('node-image-filter');
+
+// filter list
+Filter.preset.invert
+Filter.preset.grayscale
+Filter.preset.sepia
+Filter.preset.brightness
+```
+
+## Custom Filter
+You can also use your own filters. Pass the filter you created yourself as the second parameter.
+The filter function takes pixels as a parameter and must process these pixels and return them.
+
+```
+// custom filter
+let CustomInvertFilter = function (pixels) {
+    for(let i=0; i<pixels.length; i+=4 ){
+        pixels[i] = 255 - pixels[i];
+        pixels[i+1] = 255 - pixels[i+1];
+        pixels[i+2] = 255 - pixels[i+2];
+        pixels[i+3] = 255;
+    }
+    return pixels;
+};
+
+Filter.render(imagePath, CustomInvertFilter, function (result) {
+    fs.writeFile(`result.${result.type}`, result.data);
+    res.send('save filtered image');
+})
+```
+
+If you want to pass options to a filter, Use the third parameter of the Render function.
+
+```
+// custom filter with options
+function CustomBrightnessFilter (pixels, options){
+    var value = options.value || 5;
+
+    for(var i =0; i< pixels.length; i+=4){
+        pixels[i] += value;
+        pixels[i+1] += value;
+        pixels[i+2] += value;
+    }
+    return pixels;
+}
+
+// third param for option.
+let options = {
+    value : 10
+};
+
+Filter.render(imagePath, CustomBrightnessFilter, options, function (result) {
+    fs.writeFile(`result2.${result.type}`, result.data);
+    res.send('save filtered image');
+})
 ```
 
 # LICENSE
