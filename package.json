@@ -27,6 +27,6 @@
     "express": "^4.14.1"
   },
   "scripts": {
-    "dev-server": "nodemon server/index.js"
+    "dev-server": "nodemon test/server/devServer.js"
   }
 }
