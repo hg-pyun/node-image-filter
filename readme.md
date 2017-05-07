@@ -15,7 +15,7 @@ render(imagePath, filter[, options], callback);
 You can use preset filters or custom filters. callback function receive result data. The data contains image buffer, type, width, height information.
 Let's look at the example.
 
-```
+```javascript
 const Filter = require('node-image-filter');
 
 // express
@@ -39,9 +39,9 @@ app.use(function (req, res, next) {
 ```
 
 ### Preset Filters
-'node-image-filter' include Preset filters. There are currently four filters in total.
+'node-image-filter' includes Preset filters. There are currently four filters in total.
 You just need to pass it as the second parameter of the Render function.
-```
+```javascript
 const Filter = require('node-image-filter');
 
 // filter list
@@ -55,7 +55,7 @@ Filter.preset.brightness
 You can also use your own filters. Pass the filter you created yourself as the second parameter.
 The filter function takes pixels as a parameter and must process these pixels and return them.
 
-```
+```javascript
 // custom filter
 let CustomInvertFilter = function (pixels) {
     for(let i=0; i<pixels.length; i+=4 ){
@@ -75,7 +75,7 @@ Filter.render(imagePath, CustomInvertFilter, function (result) {
 
 If you want to pass options to a filter, Use the third parameter of the Render function.
 
-```
+```javascript
 // custom filter with options
 function CustomBrightnessFilter (pixels, options){
     var value = options.value || 5;
