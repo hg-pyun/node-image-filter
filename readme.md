@@ -1,50 +1,44 @@
 # node-image-filter
 Image Processing Library for nodejs.
 
-
 ## Install
 ```
 npm install node-image-filter
 ```
 
-## Basic Usage
-```
-// default module
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+## Usage
 
-// filter lib
+### Basic
+To apply a filter, use the render function.
+- imagePath : Image URL path.
+- filter : filter function.
+- callback : result callback.
+```
+render(imagePath, filter, callback);
+```
+callback func receive result data. The data contains image buffer, type, width, height information.
+
+```
 const Filter = require('node-image-filter');
 
-const app = express();
-
+// express
 app.use(function (req, res, next) {
 
-    let imagePath = path.join(__dirname, '../test/cat.jpg');
-    let invertFilter = function (pixels) {
-        let d = pixels;
-        for(let i=0; i<pixels.length; i+=4 ){
-            d[i] = 255 - d[i];
-            d[i+1] = 255 - d[i+1];
-            d[i+2] = 255 - d[i+2];
-            d[i+3] = 255;
-        }
-        return pixels;
-    };
+    let imagePath = path.join(__dirname, '../samples/cat.jpg');
 
-    Filter.render(imagePath, invertFilter, function (result) {
+    Filter.render(imagePath, Filter.preset.invert, function (result) {
+        /* result
+        {
+            data : array,
+            type : 'jpg',
+            width : 1024,
+            height : 768
+        }
+        */
         fs.writeFile(`result.${result.type}`, result.data);
         res.send('save filtered image');
     })
 });
-
-
-app.listen(3000, function () {
-    console.log('Server Running at http://127.0.0.1:3000');
-});
-
-
 ```
 
 # LICENSE
