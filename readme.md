@@ -10,7 +10,7 @@ npm install node-image-filter
 ### Render
 To apply a filter, use the render function.
 ```
-render(imagePath, filter[, values], callback);
+render(imagePath, filter[, options], callback);
 ```
 You can use preset filters or custom filters. callback function receive result data. The data contains image buffer, type, width, height information.
 Let's look at the example.
