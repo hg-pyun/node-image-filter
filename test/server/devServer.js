@@ -4,13 +4,13 @@ const fs = require('fs');
 const path = require('path');
 
 // filter lib
-const Filter = require('../lib');
+const Filter = require('../../lib');
 
 const app = express();
 
 app.use(function (req, res, next) {
 
-    let imagePath = path.join(__dirname, '../test/cat.jpg');
+    let imagePath = path.join(__dirname, '../samples/cat.jpg');
     let invertFilter = function (pixels) {
         let d = pixels;
         for(let i=0; i<pixels.length; i+=4 ){
