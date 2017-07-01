@@ -3,7 +3,7 @@ Image Processing Library for nodejs.
 
 ## Install
 ```
-npm install node-image-filter
+$ npm install node-image-filter --save
 ```
 
 ## Basic Usage
