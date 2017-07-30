@@ -26,13 +26,13 @@ app.use(function (req, res, next) {
     Filter.render(imagePath, Filter.preset.invert, function (result) {
         /* result format
         {
-            data : array,
+            data : stream,
             type : 'jpg',
             width : 1024,
             height : 768
         }
         */
-        fs.writeFile(`result.${result.type}`, result.data);  // save local
+        result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
         res.send('save filtered image');
     })
 });
@@ -68,7 +68,7 @@ let CustomInvertFilter = function (pixels) {
 };
 
 Filter.render(imagePath, CustomInvertFilter, function (result) {
-    fs.writeFile(`result.${result.type}`, result.data);
+    result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
     res.send('save filtered image');
 })
 ```
@@ -94,7 +94,7 @@ let options = {
 };
 
 Filter.render(imagePath, CustomBrightnessFilter, options, function (result) {
-    fs.writeFile(`result2.${result.type}`, result.data);
+    result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
     res.send('save filtered image');
 })
 ```

@@ -1,6 +1,6 @@
 {
   "name": "node-image-filter",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Image Filter Library for nodejs",
   "main": "index.js",
   "repository": {
@@ -28,6 +28,6 @@
     "express": "^4.14.1"
   },
   "scripts": {
-    "dev-server": "nodemon test/server/devServer.js"
+    "dev-server": "nodemon tools/server/devServer.js"
   }
 }
