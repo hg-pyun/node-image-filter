@@ -8,14 +8,28 @@ const Filter = require('../../lib');
 
 const app = express();
 
-app.use(function (req, res, next) {
+app.get('/favicon.ico', function(req, res) {
+    res.status(204);
+});
 
-    let imagePath = path.join(__dirname, '../samples/cat.jpg');
+app.use('/', function (req, res, next) {
 
-    Filter.render(imagePath, Filter.preset.invert, function (result) {
-        fs.writeFile(`result.${result.type}`, result.data);
-        res.send('save filtered image');
+    let imagePathJPG = path.join(__dirname, '../samples/cat.jpg');
+
+    Filter.render(imagePathJPG, Filter.preset.invert, function (result) {
+        result.data.pipe(fs.createWriteStream(`result.${result.type}`));
+        console.log('[DEV Server]', 'Saved JPG');
     });
+
+    let imagePathPNG = path.join(__dirname, '../samples/cat.png');
+
+    Filter.render(imagePathPNG, Filter.preset.invert, function (result) {
+        result.data.pipe(fs.createWriteStream(`result.${result.type}`));
+        console.log('[DEV Server]', 'Saved PNG');
+    });
+
+    console.log('[DEV Server]', 'Send Response');
+    res.send('Save filtered image');
 });
 
 
