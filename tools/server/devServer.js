@@ -12,7 +12,7 @@ app.use(function (req, res, next) {
 
     let imagePath = path.join(__dirname, '../samples/cat.jpg');
 
-    Filter.render(imagePath, Filter.preset.brightness, function (result) {
+    Filter.render(imagePath, Filter.preset.invert, function (result) {
         fs.writeFile(`result.${result.type}`, result.data);
         res.send('save filtered image');
     });
