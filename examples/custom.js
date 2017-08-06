@@ -14,17 +14,19 @@ app.use(function (req, res, next) {
 
     // custom filter
     let customInvertFilter = function (pixels) {
-        for(let i=0; i<pixels.length; i+=4 ){
-            pixels[i] = 255 - pixels[i];
-            pixels[i+1] = 255 - pixels[i+1];
-            pixels[i+2] = 255 - pixels[i+2];
-            pixels[i+3] = 255;
+        var data = pixels.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+            data[i] = 255 - data[i];
+            data[i + 1] = 255 - data[i + 1];
+            data[i + 2] = 255 - data[i + 2];
+            data[i + 3] = 255;
         }
-        return pixels;
+        return data;
     };
 
     Filter.render(imagePath, customInvertFilter, function (result) {
-        fs.writeFile(`result.customInvertFilter.${result.type}`, result.data);
+        result.data.pipe(fs.createWriteStream(`result.${result.type}`));
         res.send('save filtered image');
     })
 });

@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
     };
 
     Filter.render(imagePath, Filter.preset.brightness, options, function (result) {
-        fs.writeFile(`result.basic.options.${result.type}`, result.data);
+        result.data.pipe(fs.createWriteStream(`result.${result.type}`));
         res.send('save filtered image');
     })
 });
