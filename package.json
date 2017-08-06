@@ -1,6 +1,6 @@
 {
   "name": "node-image-filter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Image Filter Library for nodejs",
   "main": "index.js",
   "repository": {
@@ -8,10 +8,10 @@
     "url": "git+https://github.com/haegul/node-image-filter.git"
   },
   "keywords": [
+    "javscript",
     "nodejs",
     "filter",
     "image-processing",
-    "javscript",
     "image-filter"
   ],
   "author": "Haegul PYUN(dev-momo)",
