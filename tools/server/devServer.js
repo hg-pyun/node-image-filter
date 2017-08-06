@@ -17,6 +17,7 @@ app.use('/', function (req, res, next) {
     const imagePathJPG = path.join(__dirname, '../samples/cat.jpg');
     const imagePathPNG = path.join(__dirname, '../samples/cat.png');
 
+    // basic
     Filter.render(imagePathJPG, Filter.preset.invert, function (result) {
         result.data.pipe(fs.createWriteStream(`result.invert.${result.type}`));
         console.log('[DEV Server]', 'Saved Invert JPG');
@@ -27,6 +28,7 @@ app.use('/', function (req, res, next) {
         console.log('[DEV Server]', 'Saved Invert PNG');
     });
 
+    // convolution
     Filter.render(imagePathJPG, Filter.preset.sobel, function (result) {
         result.data.pipe(fs.createWriteStream(`result.sobel.${result.type}`));
         console.log('[DEV Server]', 'Saved Sobel JPG');
@@ -34,12 +36,25 @@ app.use('/', function (req, res, next) {
 
     Filter.render(imagePathJPG, Filter.preset.sharpen, function (result) {
         result.data.pipe(fs.createWriteStream(`result.sharpen.${result.type}`));
-        console.log('[DEV Server]', 'Saved Sobel JPG');
+        console.log('[DEV Server]', 'Saved Sharpen JPG');
     });
 
     Filter.render(imagePathJPG, Filter.preset.blur, function (result) {
         result.data.pipe(fs.createWriteStream(`result.blur.${result.type}`));
-        console.log('[DEV Server]', 'Saved Sobel JPG');
+        console.log('[DEV Server]', 'Saved Blur JPG');
+    });
+
+    // custom Filters
+    function sobel(pixels) {
+        return Filter.convolution(pixels,
+               [-1, 0, 1,
+                -2, 0, 2,
+                -1, 0, 1], 1);
+    }
+
+    Filter.render(imagePathJPG, sobel, function (result) {
+        result.data.pipe(fs.createWriteStream(`result.custom.sobel.${result.type}`));
+        console.log('[DEV Server]', 'Saved Custom Sobel JPG');
     });
 
     console.log('[DEV Server]', 'Send Response');

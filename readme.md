@@ -51,20 +51,21 @@ Filter.preset.sepia
 Filter.preset.brightness
 ```
 
-## Custom Filter
+### Custom Filter
 You can also use your own filters. Pass the filter you created yourself as the second parameter.
-The filter function takes pixels as a parameter and must process these pixels and return them.
+The filter function takes pixels as a parameter and must process these pixels.data and return.
 
 ```javascript
 // custom filter
 let CustomInvertFilter = function (pixels) {
-    for(let i=0; i<pixels.length; i+=4 ){
-        pixels[i] = 255 - pixels[i];
-        pixels[i+1] = 255 - pixels[i+1];
-        pixels[i+2] = 255 - pixels[i+2];
-        pixels[i+3] = 255;
+    var data = pixels.data;
+    for(let i=0; i<data.length; i+=4 ){
+        data[i] = 255 - data[i];
+        data[i+1] = 255 - data[i+1];
+        data[i+2] = 255 - data[i+2];
+        data[i+3] = 255;
     }
-    return pixels;
+    return data;
 };
 
 Filter.render(imagePath, CustomInvertFilter, function (result) {
@@ -78,14 +79,15 @@ If you want to pass options to a filter, Use the third parameter of the Render f
 ```javascript
 // custom filter with options
 function CustomBrightnessFilter (pixels, options){
+    var data = pixels.data;
     var value = options.value || 5;
 
-    for(var i =0; i< pixels.length; i+=4){
-        pixels[i] += value;
-        pixels[i+1] += value;
-        pixels[i+2] += value;
+    for(var i =0; i< data.length; i+=4){
+        data[i] += value;
+        data[i+1] += value;
+        data[i+2] += value;
     }
-    return pixels;
+    return data;
 }
 
 // third param for option.
@@ -97,6 +99,51 @@ Filter.render(imagePath, CustomBrightnessFilter, options, function (result) {
     result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
     res.send('save filtered image');
 })
+```
+
+## Convolution
+### Render
+You can also use convolution theory such as sobel, sharpen, and others. Here are some examples.
+```javascript
+
+// sobel
+Filter.render(imagePath, Filter.preset.sobel, function (result) {
+    result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
+    res.send('save filtered image');
+})
+
+// sharpen
+Filter.render(imagePath, Filter.preset.sharpen, function (result) {
+    result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
+    res.send('save filtered image');
+})
+
+// blur
+let options = {
+    value : 100
+};
+
+Filter.render(imagePath, Filter.preset.blur, options, function (result) {
+    result.data.pipe(fs.createWriteStream(`result.${result.type}`)); // save local
+    res.send('save filtered image');
+})
+```
+
+### Custom Convolution Filter
+The usage is very similar to the custom filter. You can make convolution filter using `Filter.convolution(pixels, weights, opaque)`.
+Also, You pass option using third parameter.
+```javascript
+function sobel(pixels) {
+    return Filter.convolution(pixels,
+           [-1, 0, 1,
+            -2, 0, 2,
+            -1, 0, 1], 1);
+}
+
+Filter.render(imagePathJPG, sobel, function (result) {
+    result.data.pipe(fs.createWriteStream(`result.${result.type}`));
+    console.log('[DEV Server]', 'Saved Custom Sobel JPG');
+});
 ```
 
 # LICENSE
