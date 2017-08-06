@@ -28,6 +28,18 @@ app.use('/', function (req, res, next) {
         console.log('[DEV Server]', 'Saved PNG');
     });
 
+    // convolutions
+    function sobel(pixels) {
+        return Filter.convolution(pixels,
+              [ -1,  0, 1,
+                -2,  0, 2,
+                -1,  0, 1], 1);
+    }
+    Filter.render(imagePathJPG, sobel, function (result) {
+        result.data.pipe(fs.createWriteStream(`result.sobel.${result.type}`));
+        console.log('[DEV Server]', 'Saved Convolution JPG');
+    });
+
     console.log('[DEV Server]', 'Send Response');
     res.send('Save filtered image');
 });
