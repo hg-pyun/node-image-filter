@@ -140,9 +140,9 @@ function sobel(pixels) {
             -1, 0, 1], 1);
 }
 
-Filter.render(imagePathJPG, sobel, function (result) {
+Filter.render(imagePath, sobel, function (result) {
     result.data.pipe(fs.createWriteStream(`result.${result.type}`));
-    console.log('[DEV Server]', 'Saved Custom Sobel JPG');
+    console.log('[DEV Server]', 'Saved Custom Sobel Image');
 });
 ```
 
