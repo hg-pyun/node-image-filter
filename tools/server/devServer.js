@@ -23,6 +23,21 @@ app.use('/', function (req, res, next) {
         console.log('[DEV Server]', 'Saved Invert JPG');
     });
 
+    Filter.render(imagePathJPG, Filter.preset.grayscale, function (result) {
+        result.data.pipe(fs.createWriteStream(`result.grayscale.${result.type}`));
+        console.log('[DEV Server]', 'Saved Grayscale JPG');
+    });
+
+    Filter.render(imagePathJPG, Filter.preset.sepia, function (result) {
+        result.data.pipe(fs.createWriteStream(`result.sepia.${result.type}`));
+        console.log('[DEV Server]', 'Saved Sepia JPG');
+    });
+
+    Filter.render(imagePathJPG, Filter.preset.invert, function (result) {
+        result.data.pipe(fs.createWriteStream(`result.invert.${result.type}`));
+        console.log('[DEV Server]', 'Saved Invert JPG');
+    });
+
     Filter.render(imagePathPNG, Filter.preset.invert, function (result) {
         result.data.pipe(fs.createWriteStream(`result.invert.${result.type}`));
         console.log('[DEV Server]', 'Saved Invert PNG');
