@@ -13,7 +13,7 @@ app.use(function (req, res, next) {
     let imagePath = path.join(__dirname, 'cat.jpg');
 
     Filter.render(imagePath, Filter.preset.invert, function (result) {
-        fs.writeFile(`result.basic.${result.type}`, result.data);
+        result.data.pipe(fs.createWriteStream(`result.${result.type}`));
         res.send('save filtered image');
     });
 });

@@ -13,24 +13,25 @@ app.use(function (req, res, next) {
     let imagePath = path.join(__dirname, 'cat.jpg');
 
     // custom filter with options
-    function CustomBrightnessFilter (pixels, options){
+    function CustomBrightnessFilter(pixels, options) {
+        var data = pixels.data;
         var value = options.value || 5;
 
-        for(var i =0; i< pixels.length; i+=4){
-            pixels[i] += value;
-            pixels[i+1] += value;
-            pixels[i+2] += value;
+        for (var i = 0; i < data.length; i += 4) {
+            data[i] += value;
+            data[i + 1] += value;
+            data[i + 2] += value;
         }
-        return pixels;
+        return data;
     }
 
     // third param for option.
     let options = {
-        value : 10
+        value: 10
     };
 
     Filter.render(imagePath, CustomBrightnessFilter, options, function (result) {
-        fs.writeFile(`result.CustomBrightnessFilter.${result.type}`, result.data);
+        result.data.pipe(fs.createWriteStream(`result.${result.type}`));
         res.send('save filtered image');
     })
 });
