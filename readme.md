@@ -39,7 +39,7 @@ app.use(function (req, res, next) {
 ```
 
 ### Preset Filters
-'node-image-filter' includes Preset filters. There are currently four filters in total.
+`node-image-filter` includes Preset filters. There are currently four filters in total.
 You just need to pass it as the second parameter of the Render function.
 ```javascript
 const Filter = require('node-image-filter');
