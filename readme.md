@@ -1,4 +1,8 @@
 # node-image-filter
+[![npm](https://img.shields.io/npm/v/node-image-filter.svg)](https://www.npmjs.com/package/node-image-filter)
+[![npm](https://img.shields.io/npm/dt/node-image-filter.svg)](https://www.npmjs.com/package/node-image-filter)
+[![GitHub license](https://img.shields.io/github/license/hg-pyun/node-image-filter.svg)](https://github.com/hg-pyun/node-image-filter/blob/master/LICENSE)
+
 Image Processing Library for nodejs.
 
 ## Install
